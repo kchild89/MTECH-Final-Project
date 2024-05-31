@@ -1,15 +1,17 @@
 $(document).ready(function () {
     let comments = [];
 
-    function renderComments() {
+    function displayComment() {
         const commentsContainer = $('.comments-container');
         commentsContainer.empty();
         comments.forEach((comment, index) => {
             const commentElement = $(`
                 <div class="comment">
+                <img src="Images/profile-pic.png" class="profile-pic" alt="Profile Picture">
+                <div class="comment-content">
                     <p><strong>${comment.displayName}</strong></p>
                     <p class="comment-text">${comment.text}</p>
-                    <div class="comment-actions">
+                    <div class="comment-edit-delete">
                         <button class="edit-comment" data-index="${index}">Edit</button>
                         <button class="delete-comment" data-index="${index}">Delete</button>
                     </div>
@@ -21,17 +23,17 @@ $(document).ready(function () {
 
     function addComment(displayName, text) {
         comments.push({ displayName, text });
-        renderComments();
+        displayComment();
     }
 
     function deleteComment(index) {
         comments.splice(index, 1);
-        renderComments();
+        displayComment();
     }
 
     function editComment(index, newText) {
         comments[index].text = newText;
-        renderComments();
+        displayComment();
     }
 
     $('#submitComment').on('click', function () {
